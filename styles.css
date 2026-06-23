@@ -1063,6 +1063,16 @@ ul {
   }
 }
 
+/* Screen: scaled preview when content overflows A4 */
+@media screen {
+  .one-pager.is-scaled {
+    transform: scale(var(--page-scale, 1));
+    transform-origin: top center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* Print / PDF */
 @page {
   size: A4 portrait;
@@ -1071,12 +1081,12 @@ ul {
 
 @media print {
   html, body {
-    width: var(--page-width);
-    height: var(--page-height);
+    width: 210mm;
+    height: 297mm;
     overflow: hidden;
-    background: var(--background);
-    padding: 0;
-    margin: 0;
+    background: var(--background) !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   .no-print,
@@ -1085,17 +1095,50 @@ ul {
   }
 
   .one-pager {
-    width: var(--page-width);
-    height: var(--page-height);
-    max-height: var(--page-height);
-    padding: 8mm;
+    width: 210mm !important;
+    min-height: auto;
+    height: auto;
+    max-height: none;
+    padding: 8mm !important;
     gap: 5px;
+    margin: 0 auto !important;
     box-shadow: none;
     border-radius: 0;
-    overflow: hidden;
+    overflow: visible !important;
     page-break-after: avoid;
     page-break-inside: avoid;
-    transform-origin: top left;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Centered scale — top-left origin + symmetric horizontal margin */
+  .one-pager.is-scaled {
+    transform: scale(var(--page-scale, 1)) !important;
+    transform-origin: top left !important;
+    margin-left: calc((210mm - 210mm * var(--page-scale, 1)) / 2) !important;
+    margin-right: calc((210mm - 210mm * var(--page-scale, 1)) / 2) !important;
+  }
+
+  img {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    max-width: 100%;
+  }
+
+  .hero__logo-wrap {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    box-shadow: none !important;
+    background: oklch(0.22 0.04 250) !important;
+  }
+
+  .hero__logo {
+    object-fit: contain !important;
+    width: 48px !important;
+    height: 48px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .reveal,
@@ -1112,12 +1155,26 @@ ul {
     animation: none !important;
   }
 
-  .panel--mascot {
-    overflow: hidden;
+  .panel--mascot,
+  .panel--profile.panel--mascot,
+  .duo,
+  .bottom-grid {
+    overflow: visible !important;
   }
 
-  .panel--profile.panel--mascot {
-    overflow: visible;
+  .panel__mascot img,
+  .mascot-float img,
+  .panel__mascot--profile img,
+  .panel__mascot--float img {
+    filter: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    image-rendering: auto;
+    max-height: 72px !important;
+    width: auto !important;
   }
 
   .panel--profile .panel__mascot--profile {
@@ -1127,14 +1184,10 @@ ul {
   }
 
   .panel__mascot--float {
-    top: auto;
-    bottom: 0.2rem;
-    right: 0.25rem;
-  }
-
-  .panel__mascot--float img {
-    max-height: 55px;
-    width: auto;
+    position: absolute;
+    top: -1.25rem !important;
+    right: 0.25rem !important;
+    bottom: auto !important;
   }
 
   .panel,
@@ -1151,15 +1204,6 @@ ul {
     min-height: 0;
   }
 
-  .panel__mascot img {
-    max-height: 55px;
-    width: auto;
-  }
-
-  .cta__qr {
-    margin-left: 0;
-  }
-
   .cta__qr img {
     width: 50px;
     height: 50px;
@@ -1173,12 +1217,27 @@ ul {
     min-height: 0;
   }
 
-  a {
+  /* Preserve clickable hyperlinks in PDF (Chrome / Edge) */
+  a[href] {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklch, currentColor 55%, transparent);
+  }
+
+  .team-card[href],
+  .cta__link[href],
+  .cta__qr[href],
+  .hero__by a[href] {
     color: inherit;
   }
 
   .cta__link {
     border-color: color-mix(in oklch, white 50%, transparent);
+    text-decoration: none;
+  }
+
+  .team-card__linkedin {
+    text-decoration: underline;
   }
 }
 

@@ -26,32 +26,51 @@
     items.forEach((el) => observer.observe(el));
   }
 
-  /* Auto-scale for single-page PDF if content overflows */
+  function resetPageScale() {
+    const page = document.getElementById("onePager");
+    if (!page) return;
+    page.classList.remove("is-scaled");
+    page.style.removeProperty("--page-scale");
+  }
+
+  /* Scale to fit one A4 page — CSS variable avoids broken images/links in PDF */
   function fitToPage() {
     const page = document.getElementById("onePager");
     if (!page) return;
+
+    resetPageScale();
 
     const pageHeightMm = 297;
     const paddingMm = 16;
     const maxPx = ((pageHeightMm - paddingMm) / 25.4) * 96;
 
-    page.style.transform = "none";
-    page.style.width = "";
-
     const contentHeight = page.scrollHeight;
     if (contentHeight > maxPx) {
       const scale = maxPx / contentHeight;
-      page.style.transform = `scale(${scale})`;
-      page.style.transformOrigin = "top center";
-      page.style.width = `${100 / scale}%`;
+      page.classList.add("is-scaled");
+      page.style.setProperty("--page-scale", String(scale));
     }
   }
 
-  function resetPageScale() {
-    const page = document.getElementById("onePager");
-    if (!page) return;
-    page.style.transform = "none";
-    page.style.width = "";
+  function ensureImagesLoaded() {
+    const images = document.querySelectorAll("#onePager img");
+    return Promise.all(
+      Array.from(images).map((img) => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", resolve, { once: true });
+        });
+      })
+    );
+  }
+
+  async function preparePrint() {
+    document.querySelectorAll(".reveal").forEach((el) => {
+      el.classList.add("is-visible");
+    });
+    await ensureImagesLoaded();
+    fitToPage();
   }
 
   /* PDF export via print dialog */
@@ -59,20 +78,16 @@
     const btn = document.getElementById("exportPdf");
     if (!btn) return;
 
-    btn.addEventListener("click", () => {
-      fitToPage();
+    btn.addEventListener("click", async () => {
+      await preparePrint();
       window.print();
     });
 
     window.addEventListener("afterprint", resetPageScale);
   }
 
-  /* Show all reveals immediately before print */
   window.addEventListener("beforeprint", () => {
-    document.querySelectorAll(".reveal").forEach((el) => {
-      el.classList.add("is-visible");
-    });
-    fitToPage();
+    preparePrint();
   });
 
   window.addEventListener("afterprint", resetPageScale);
