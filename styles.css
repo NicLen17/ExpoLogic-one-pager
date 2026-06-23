@@ -415,12 +415,12 @@ ul {
   z-index: 2;
   pointer-events: none;
   right: 0;
-  top: -0.15rem;
+  top: -0.85rem;
   margin: 0;
 }
 
 .panel__mascot--profile img {
-  max-height: 5.75rem;
+  max-height: 4rem;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 6px 16px color-mix(in oklch, var(--foreground) 18%, transparent));
@@ -460,7 +460,7 @@ ul {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.3rem 0.5rem;
-  padding-right: 6.5rem;
+  padding-right: 4.5rem;
 }
 
 .meta-item dt {
@@ -1073,6 +1073,30 @@ ul {
 
 /* Responsive (screen only) */
 @media screen and (max-width: 720px) {
+  body {
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  .one-pager {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem;
+    margin-inline: auto;
+    overflow-x: clip;
+  }
+
+  .export-btn {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.75rem;
+  }
+
+  /* Mascots hidden on mobile view; restored in @media print */
+  .panel__mascot {
+    display: none !important;
+  }
+
   .duo,
   .bottom-grid {
     grid-template-columns: 1fr;
@@ -1096,26 +1120,6 @@ ul {
 
   .validation-strip {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .panel__mascot--profile {
-    position: static;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 0.25rem;
-  }
-
-  .panel__mascot--profile img {
-    max-height: 4.5rem;
-  }
-
-  .meta-grid-wrap {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .meta-grid-wrap .panel__mascot--profile {
-    order: -1;
   }
 
   .hero__tagline {
@@ -1147,6 +1151,17 @@ ul {
 
   .hero__title {
     font-size: 1.6rem;
+  }
+
+  .cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .cta__qr {
+    margin-left: 0;
+    align-self: center;
   }
 }
 
@@ -1249,6 +1264,12 @@ ul {
     overflow: visible !important;
   }
 
+  .panel__mascot,
+  .panel__mascot--profile,
+  .panel__mascot--float {
+    display: block !important;
+  }
+
   .panel__mascot img,
   .mascot-float img,
   .panel__mascot--profile img,
@@ -1267,7 +1288,7 @@ ul {
   .panel--profile .panel__mascot--profile {
     position: absolute;
     right: 0.25rem;
-    top: 0;
+    top: -0.65rem;
   }
 
   .panel__mascot--float {
