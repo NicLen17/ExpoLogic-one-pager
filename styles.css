@@ -1167,12 +1167,16 @@ ul {
     print-color-adjust: exact;
   }
 
-  /* Centered scale — top-left origin + symmetric horizontal margin */
+  /*
+   * zoom (not transform) keeps hyperlink hit areas aligned in Chrome PDF.
+   * Inverse width compensates so the visual page stays 210mm wide.
+   */
   .one-pager.is-scaled {
-    transform: scale(var(--page-scale, 1)) !important;
-    transform-origin: top left !important;
-    margin-left: calc((210mm - 210mm * var(--page-scale, 1)) / 2) !important;
-    margin-right: calc((210mm - 210mm * var(--page-scale, 1)) / 2) !important;
+    transform: none !important;
+    zoom: var(--page-scale, 1);
+    width: calc(210mm / var(--page-scale, 1)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   img {

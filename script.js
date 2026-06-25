@@ -26,19 +26,49 @@
     items.forEach((el) => observer.observe(el));
   }
 
-  function resetPageScale() {
+  let savedLinkTargets = [];
+
+  function stripBlankTargets() {
+    savedLinkTargets = [];
+    document.querySelectorAll('#onePager a[target="_blank"]').forEach((anchor) => {
+      savedLinkTargets.push({
+        el: anchor,
+        target: anchor.getAttribute("target"),
+        rel: anchor.getAttribute("rel"),
+      });
+      anchor.removeAttribute("target");
+      anchor.removeAttribute("rel");
+    });
+  }
+
+  function restoreBlankTargets() {
+    savedLinkTargets.forEach(({ el, target, rel }) => {
+      if (target) el.setAttribute("target", target);
+      else el.removeAttribute("target");
+      if (rel) el.setAttribute("rel", rel);
+      else el.removeAttribute("rel");
+    });
+    savedLinkTargets = [];
+  }
+
+  function clearPageScale() {
     const page = document.getElementById("onePager");
     if (!page) return;
     page.classList.remove("is-scaled");
     page.style.removeProperty("--page-scale");
   }
 
-  /* Scale to fit one A4 page — CSS variable avoids broken images/links in PDF */
+  function resetPageScale() {
+    clearPageScale();
+    restoreBlankTargets();
+  }
+
+  /* Scale to fit one A4 page — print uses zoom (not transform) so PDF links stay aligned */
   function fitToPage() {
     const page = document.getElementById("onePager");
     if (!page) return;
 
-    resetPageScale();
+    clearPageScale();
 
     const pageHeightMm = 297;
     const paddingMm = 16;
@@ -70,6 +100,7 @@
       el.classList.add("is-visible");
     });
     await ensureImagesLoaded();
+    stripBlankTargets();
     fitToPage();
   }
 
