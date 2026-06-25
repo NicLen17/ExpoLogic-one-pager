@@ -12,6 +12,8 @@
   --muted-foreground: oklch(0.48 0.03 75);
   --accent: oklch(0.58 0.12 45);
   --accent-foreground: oklch(0.99 0.008 95);
+  --danger: oklch(0.62 0.17 28);
+  --success: oklch(0.65 0.16 145);
   --border: oklch(0.9 0.015 85);
   --ring: oklch(0.48 0.06 145);
   --radius: 0.625rem;
@@ -292,17 +294,6 @@ ul {
   overflow: hidden;
 }
 
-.panel--mascot {
-  overflow: visible;
-  z-index: 1;
-}
-
-.duo,
-.bottom-grid {
-  position: relative;
-  overflow: visible;
-}
-
 .panel__title {
   font-size: 0.95rem;
   color: var(--foreground);
@@ -379,6 +370,16 @@ ul {
   color: var(--muted-foreground);
 }
 
+.panel__badge--danger {
+  background: color-mix(in oklch, var(--danger) 15%, transparent);
+  color: var(--danger);
+}
+
+.panel__badge--success {
+  background: color-mix(in oklch, var(--success) 15%, transparent);
+  color: var(--success);
+}
+
 .panel__badge--accent {
   background: color-mix(in oklch, var(--accent) 18%, transparent);
   color: var(--accent);
@@ -399,31 +400,10 @@ ul {
 /* Profile */
 .panel--profile {
   display: block;
-  overflow: visible;
 }
 
 .panel--profile .panel__content {
   width: 100%;
-}
-
-.meta-grid-wrap {
-  position: relative;
-}
-
-.panel__mascot--profile {
-  position: absolute;
-  z-index: 2;
-  pointer-events: none;
-  right: 0;
-  top: -0.85rem;
-  margin: 0;
-}
-
-.panel__mascot--profile img {
-  max-height: 4rem;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 6px 16px color-mix(in oklch, var(--foreground) 18%, transparent));
 }
 
 .profile-head {
@@ -458,9 +438,16 @@ ul {
 
 .meta-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.3rem 0.5rem;
-  padding-right: 4.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.45rem 0.6rem;
+}
+
+.meta-item:not(.meta-item--values) {
+  min-width: 0;
+  padding: 0.38rem 0.45rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .meta-item dt {
@@ -472,17 +459,42 @@ ul {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted-foreground);
-  margin-bottom: 0.08rem;
+  margin-bottom: 0.2rem;
 }
 
 .meta-item dd {
   font-size: 0.66rem;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.35;
+}
+
+.meta-item:not(.meta-item--values) dd {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-height: 2.35rem;
+}
+
+.meta-item__line {
+  display: block;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.meta-item__line--muted {
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
 }
 
 .meta-item--values {
   grid-column: 1 / -1;
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
 .chip {
@@ -554,20 +566,6 @@ ul {
   line-height: 1.25;
 }
 
-/* Floating mascots — above panels, outside layout flow */
-.panel__mascot--float {
-  position: absolute;
-  z-index: 3;
-  pointer-events: none;
-  top: -1.15rem;
-  right: 0.5rem;
-  margin: 0;
-}
-
-.panel__mascot--float-right {
-  right: 0.35rem;
-}
-
 .panel--objectives .panel__title {
   margin-bottom: 0.55rem;
 }
@@ -579,50 +577,6 @@ ul {
 .panel--objectives .feature-list li {
   font-size: 0.66rem;
   margin-bottom: 0.32rem;
-}
-
-.panel--problem .panel__mascot--float,
-.panel--solution .panel__mascot--float {
-  top: -1.1rem;
-  right: 0.15rem;
-}
-
-.panel--team .panel__mascot--float {
-  top: -1rem;
-  right: 0.1rem;
-}
-
-.panel--objectives .panel__mascot--float {
-  top: -1.05rem;
-  right: 0;
-}
-
-.panel__mascot img {
-  filter: drop-shadow(0 6px 16px color-mix(in oklch, var(--foreground) 18%, transparent));
-  max-height: none;
-}
-
-.mascot-float img {
-  animation: float 5s ease-in-out infinite;
-}
-
-.mascot-float--slow img {
-  animation-duration: 7s;
-}
-
-.mascot-float--wave img {
-  animation: float 4s ease-in-out infinite, wave 2.5s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-@keyframes wave {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-4px) rotate(-2deg); }
-  75% { transform: translateY(-4px) rotate(2deg); }
 }
 
 /* Duo: Problem + Solution */
@@ -1092,11 +1046,6 @@ ul {
     font-size: 0.75rem;
   }
 
-  /* Mascots hidden on mobile view; restored in @media print */
-  .panel__mascot {
-    display: none !important;
-  }
-
   .duo,
   .bottom-grid {
     grid-template-columns: 1fr;
@@ -1114,8 +1063,12 @@ ul {
   }
 
   .meta-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding-right: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .meta-item:not(.meta-item--values) dd {
+    min-height: 0;
   }
 
   .validation-strip {
@@ -1251,51 +1204,14 @@ ul {
   }
 
   .orb,
-  .mascot-float img,
   .hero__logo-wrap,
   .hero__accent-line {
     animation: none !important;
   }
 
-  .panel--mascot,
-  .panel--profile.panel--mascot,
   .duo,
   .bottom-grid {
     overflow: visible !important;
-  }
-
-  .panel__mascot,
-  .panel__mascot--profile,
-  .panel__mascot--float {
-    display: block !important;
-  }
-
-  .panel__mascot img,
-  .mascot-float img,
-  .panel__mascot--profile img,
-  .panel__mascot--float img {
-    filter: none !important;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    image-rendering: auto;
-    max-height: 72px !important;
-    width: auto !important;
-  }
-
-  .panel--profile .panel__mascot--profile {
-    position: absolute;
-    right: 0.25rem;
-    top: -0.65rem;
-  }
-
-  .panel__mascot--float {
-    position: absolute;
-    top: -1.25rem !important;
-    right: 0.25rem !important;
-    bottom: auto !important;
   }
 
   .panel,
