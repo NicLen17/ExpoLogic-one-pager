@@ -125,38 +125,6 @@ ul {
   66% { transform: translate(-20px, 15px) scale(0.95); }
 }
 
-/* Export button */
-.export-btn {
-  position: fixed;
-  top: 1.25rem;
-  right: 1.25rem;
-  z-index: 100;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.1rem;
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--primary-foreground);
-  background: var(--primary);
-  border: none;
-  border-radius: calc(var(--radius) + 2px);
-  cursor: pointer;
-  box-shadow: 0 4px 20px color-mix(in oklch, var(--primary) 35%, transparent);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.export-btn:hover {
-  transform: translateY(-2px);
-  background: color-mix(in oklch, var(--primary) 88%, black);
-  box-shadow: 0 8px 28px color-mix(in oklch, var(--primary) 40%, transparent);
-}
-
-.export-btn:active {
-  transform: translateY(0);
-}
-
 /* Main page container */
 .one-pager {
   position: relative;
@@ -1012,10 +980,6 @@ ul {
 
 /* Screen: center page with shadow */
 @media screen {
-  body {
-    padding: 2rem 1rem 3rem;
-  }
-
   .one-pager {
     box-shadow:
       0 0 0 1px var(--border),
@@ -1027,23 +991,12 @@ ul {
 
 /* Responsive (screen only) */
 @media screen and (max-width: 720px) {
-  body {
-    padding: 1.25rem 1rem 2rem;
-  }
-
   .one-pager {
     width: 100%;
     max-width: 100%;
     padding: 0.75rem;
     margin-inline: auto;
     overflow-x: clip;
-  }
-
-  .export-btn {
-    top: 0.75rem;
-    right: 0.75rem;
-    padding: 0.55rem 0.85rem;
-    font-size: 0.75rem;
   }
 
   .duo,
@@ -1145,8 +1098,15 @@ ul {
   }
 
   .no-print,
+  .doc-nav,
+  .export-modal,
   .ambient {
     display: none !important;
+  }
+
+  .doc-viewport {
+    padding: 0 !important;
+    min-height: auto;
   }
 
   .one-pager {

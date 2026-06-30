@@ -1,9 +1,11 @@
 (function () {
   "use strict";
 
+  const PAGE_ID = "poster";
+  const PAGE_HEIGHT_MM = 1100;
+
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* Scroll reveal */
   function initReveal() {
     const items = document.querySelectorAll(".reveal");
     if (prefersReducedMotion) {
@@ -20,17 +22,21 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
     );
 
     items.forEach((el) => observer.observe(el));
+  }
+
+  function initScreenScale() {
+    /* Vista en px legible; el tamaño físico (mm) solo aplica en @media print */
   }
 
   let savedLinkTargets = [];
 
   function stripBlankTargets() {
     savedLinkTargets = [];
-    document.querySelectorAll('#onePager a[target="_blank"]').forEach((anchor) => {
+    document.querySelectorAll(`#${PAGE_ID} a[target="_blank"]`).forEach((anchor) => {
       savedLinkTargets.push({
         el: anchor,
         target: anchor.getAttribute("target"),
@@ -52,7 +58,7 @@
   }
 
   function clearPageScale() {
-    const page = document.getElementById("onePager");
+    const page = document.getElementById(PAGE_ID);
     if (!page) return;
     page.classList.remove("is-scaled");
     page.style.removeProperty("--page-scale");
@@ -63,18 +69,35 @@
     restoreBlankTargets();
   }
 
-  /* Scale to fit one A4 page — print uses zoom (not transform) so PDF links stay aligned */
+  function mmToPx(mm) {
+    return (mm / 25.4) * 96;
+  }
+
+  function measurePosterHeight(page) {
+    document.body.classList.add("is-print-prep");
+    page.classList.add("is-print-prep");
+
+    const savedMinHeight = page.style.minHeight;
+    page.style.minHeight = "auto";
+    void page.offsetHeight;
+    const contentHeight = page.scrollHeight;
+    page.style.minHeight = savedMinHeight;
+
+    page.classList.remove("is-print-prep");
+    document.body.classList.remove("is-print-prep");
+
+    return contentHeight;
+  }
+
   function fitToPage() {
-    const page = document.getElementById("onePager");
+    const page = document.getElementById(PAGE_ID);
     if (!page) return;
 
     clearPageScale();
 
-    const pageHeightMm = 297;
-    const paddingMm = 16;
-    const maxPx = ((pageHeightMm - paddingMm) / 25.4) * 96;
+    const contentHeight = measurePosterHeight(page);
+    const maxPx = mmToPx(PAGE_HEIGHT_MM);
 
-    const contentHeight = page.scrollHeight;
     if (contentHeight > maxPx) {
       const scale = maxPx / contentHeight;
       page.classList.add("is-scaled");
@@ -83,7 +106,7 @@
   }
 
   function ensureImagesLoaded() {
-    const images = document.querySelectorAll("#onePager img");
+    const images = document.querySelectorAll(`#${PAGE_ID} img`);
     return Promise.all(
       Array.from(images).map((img) => {
         if (img.complete && img.naturalWidth > 0) return Promise.resolve();
@@ -99,6 +122,9 @@
     document.querySelectorAll(".reveal").forEach((el) => {
       el.classList.add("is-visible");
     });
+    if (document.fonts?.ready) {
+      await document.fonts.ready;
+    }
     await ensureImagesLoaded();
     stripBlankTargets();
     fitToPage();
@@ -117,5 +143,6 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     initReveal();
+    initScreenScale();
   });
 })();
