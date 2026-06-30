@@ -2,7 +2,9 @@
   "use strict";
 
   const PAGE_ID = "poster";
+  const PAGE_WIDTH_MM = 800;
   const PAGE_HEIGHT_MM = 1100;
+  const SCALE_SAFETY = 0.992;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -62,47 +64,75 @@
     if (!page) return;
     page.classList.remove("is-scaled");
     page.style.removeProperty("--page-scale");
+    page.style.removeProperty("zoom");
+    page.style.removeProperty("width");
   }
 
   function resetPageScale() {
+    const page = document.getElementById(PAGE_ID);
     clearPageScale();
     restoreBlankTargets();
+    document.documentElement.classList.remove("is-print-prep");
+    document.body.classList.remove("is-print-prep");
+    page?.classList.remove("is-print-prep");
   }
 
   function mmToPx(mm) {
     return (mm / 25.4) * 96;
   }
 
-  function measurePosterHeight(page) {
+  function waitForLayout() {
+    return new Promise((resolve) => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(resolve);
+      });
+    });
+  }
+
+  async function measurePosterHeight(page) {
+    document.documentElement.classList.add("is-print-prep");
     document.body.classList.add("is-print-prep");
     page.classList.add("is-print-prep");
 
-    const savedMinHeight = page.style.minHeight;
-    page.style.minHeight = "auto";
-    void page.offsetHeight;
-    const contentHeight = page.scrollHeight;
-    page.style.minHeight = savedMinHeight;
+    page.style.removeProperty("height");
+    page.style.removeProperty("min-height");
+    page.style.removeProperty("zoom");
+    page.style.removeProperty("width");
 
-    page.classList.remove("is-print-prep");
-    document.body.classList.remove("is-print-prep");
+    await waitForLayout();
 
-    return contentHeight;
+    const style = getComputedStyle(page);
+    const gap = parseFloat(style.rowGap) || 0;
+    const children = [...page.children];
+    let childrenSum = 0;
+    children.forEach((child, index) => {
+      childrenSum += child.getBoundingClientRect().height;
+      if (index > 0) childrenSum += gap;
+    });
+
+    const paddingY = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+    return Math.max(page.scrollHeight, childrenSum + paddingY);
   }
 
-  function fitToPage() {
+  function applyPageScale(page, scale) {
+    page.classList.add("is-scaled");
+    page.style.setProperty("--page-scale", String(scale));
+    page.style.setProperty("zoom", String(scale));
+    page.style.setProperty("width", `calc(${PAGE_WIDTH_MM}mm / ${scale})`);
+  }
+
+  async function fitToPage() {
     const page = document.getElementById(PAGE_ID);
     if (!page) return;
 
     clearPageScale();
 
-    const contentHeight = measurePosterHeight(page);
+    const contentHeight = await measurePosterHeight(page);
     const maxPx = mmToPx(PAGE_HEIGHT_MM);
 
-    if (contentHeight > maxPx) {
-      const scale = maxPx / contentHeight;
-      page.classList.add("is-scaled");
-      page.style.setProperty("--page-scale", String(scale));
-    }
+    /* Solo reduce escala para que TODO el contenido quepa; margen anti-recorte. */
+    const scale = Math.min(1, (maxPx / contentHeight) * SCALE_SAFETY);
+    applyPageScale(page, scale);
   }
 
   function ensureImagesLoaded() {
@@ -127,7 +157,11 @@
     }
     await ensureImagesLoaded();
     stripBlankTargets();
-    fitToPage();
+    await fitToPage();
+    /* Mantener prep activo hasta afterprint — alinea medición con export. */
+    document.documentElement.classList.add("is-print-prep");
+    document.body.classList.add("is-print-prep");
+    document.getElementById(PAGE_ID)?.classList.add("is-print-prep");
   }
 
   window.__expoPrint = {
