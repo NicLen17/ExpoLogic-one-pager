@@ -14,6 +14,9 @@
   --danger-border: color-mix(in oklch, var(--danger) 28%, var(--border));
   --hero-problem: oklch(0.48 0.18 25);
   --hero-problem-bg: oklch(0.955 0.04 25);
+  --hero-badge: oklch(0.56 0.11 22);
+  --hero-badge-bg: oklch(0.965 0.028 22);
+  --hero-badge-border: oklch(0.84 0.05 22);
   --success: var(--primary);
   --success-bg: color-mix(in oklch, var(--primary) 5%, white);
   --success-border: color-mix(in oklch, var(--primary) 22%, var(--border));
@@ -221,19 +224,33 @@ ul {
 }
 
 .hero-problems__badge {
-  display: block;
-  text-align: center;
-  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  width: fit-content;
+  margin: 0 auto 1.2mm;
+  padding: 1.4mm 3mm;
+  font-size: clamp(0.68rem, 1.05vw, 0.78rem);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--danger);
-  margin-bottom: 1.5mm;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  color: var(--hero-badge);
+  background: var(--hero-badge-bg);
+  border: 1.5px solid var(--hero-badge-border);
+  border-radius: calc(var(--radius) - 1px);
+}
+
+.hero-problems__badge-icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
 }
 
 .hero-problems__headline {
   text-align: center;
-  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  font-size: clamp(2.15rem, 4.8vw, 3rem);
   color: var(--foreground);
   margin-bottom: 4mm;
   line-height: 1.05;
@@ -256,6 +273,7 @@ ul {
   gap: 3mm;
   margin-bottom: 3mm;
   min-width: 0;
+  align-items: stretch;
 }
 
 .hero-actor {
@@ -268,17 +286,33 @@ ul {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   min-width: 0;
+  height: 100%;
   box-shadow: 0 1px 0 color-mix(in oklch, var(--foreground) 6%, transparent);
 }
 
 .hero-actor__role {
-  font-size: clamp(0.88rem, 1.45vw, 1rem);
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  padding: 2.2mm 3mm;
+  font-size: clamp(0.92rem, 1.55vw, 1.12rem);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
   color: var(--foreground);
   text-align: center;
   margin: 0;
+  border-radius: calc(var(--radius) - 1px);
+  border: 2px solid color-mix(in oklch, var(--foreground) 18%, var(--border));
+  background: color-mix(in oklch, var(--foreground) 5%, white);
+}
+
+.hero-actor__role-icon {
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
 }
 
 .hero-actor__compare {
@@ -365,13 +399,16 @@ ul {
 }
 
 .hero-mockup {
-  margin: 0;
+  margin: 1mm 0 0;
   overflow: hidden;
   min-width: 0;
-  flex: 0 0 auto;
-  margin-top: auto;
+  flex: 1 1 auto;
+  min-height: 0;
   align-self: stretch;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-mockup__img {
@@ -380,7 +417,7 @@ ul {
   height: auto;
   max-width: 100%;
   object-fit: contain;
-  object-position: center bottom;
+  object-position: center center;
 }
 
 .hero-mockup--laptop {
@@ -759,7 +796,7 @@ ul {
 .biz-validation {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: 0;
   align-items: stretch;
   padding: 4.5mm;
@@ -772,7 +809,7 @@ ul {
 .biz-validation__col {
   display: grid;
   grid-template-rows: subgrid;
-  grid-row: span 3;
+  grid-row: span 2;
   gap: 2.5mm;
   min-width: 0;
   padding: 0 3mm;
@@ -789,7 +826,7 @@ ul {
 .biz-validation__divider {
   width: 1px;
   background: var(--border);
-  grid-row: span 3;
+  grid-row: span 2;
   align-self: stretch;
 }
 
@@ -812,7 +849,7 @@ ul {
   justify-content: center;
   height: 100%;
   min-height: 0;
-  padding: 4.5mm 3mm;
+  padding: 6mm 3.5mm;
   box-sizing: border-box;
   text-align: center;
 }
@@ -842,13 +879,13 @@ ul {
 }
 
 .biz-validation__grid .stat-box__value {
-  font-size: clamp(1.65rem, 3.2vw, 2.05rem);
+  font-size: clamp(2.15rem, 4.4vw, 2.9rem);
   line-height: 1;
 }
 
 .biz-validation__grid .stat-box__label {
-  font-size: clamp(0.82rem, 1.55vw, 0.95rem);
-  margin-top: 2mm;
+  font-size: clamp(0.88rem, 1.65vw, 1rem);
+  margin-top: 2.5mm;
   line-height: 1.25;
 }
 
@@ -1146,15 +1183,18 @@ ul {
   align-items: center;
   gap: 3mm;
   min-width: 0;
+  width: 100%;
 }
 
 .caw-unified__logo {
   width: 56px;
   height: 56px;
-  border-radius: var(--radius);
-  background: white;
-  padding: 5px;
+  border-radius: 50%;
+  background: transparent;
+  padding: 0;
+  border: 3px solid var(--caw-brand);
   flex-shrink: 0;
+  object-fit: cover;
 }
 
 .caw-unified__title {
@@ -1163,6 +1203,7 @@ ul {
   margin: 0;
   line-height: 1.2;
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .caw-unified__brand {
@@ -1170,16 +1211,20 @@ ul {
 }
 
 .caw-unified__category {
-  font-size: 0.82em;
-  font-weight: 600;
-  color: color-mix(in oklch, white 72%, transparent);
+  font-size: clamp(0.82rem, 1.35vw, 0.95rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: color-mix(in oklch, white 82%, transparent);
   white-space: nowrap;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .caw-unified__text {
-  font-size: clamp(0.92rem, 1.5vw, 1.02rem);
-  line-height: 1.38;
-  opacity: 0.92;
+  font-size: clamp(1.05rem, 1.85vw, 1.25rem);
+  line-height: 1.42;
+  opacity: 0.95;
   margin: 0;
 }
 
@@ -1597,8 +1642,9 @@ ul {
     }
 
     .hero-problems__badge {
-      font-size: clamp(0.7rem, 2.8vw, 0.82rem);
-      letter-spacing: 0.1em;
+      font-size: clamp(0.62rem, 2.4vw, 0.72rem);
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.65rem;
     }
 
     .hero-problems__headline {
@@ -1753,7 +1799,7 @@ ul {
     }
 
     .biz-validation__grid .stat-box__value {
-      font-size: clamp(1.45rem, 5.5vw, 1.85rem);
+      font-size: clamp(1.85rem, 6vw, 2.35rem);
     }
 
     .biz-validation__grid .stat-box__label {
@@ -1809,6 +1855,9 @@ ul {
 
     .caw-unified__category {
       white-space: normal;
+      margin-left: 0;
+      width: 100%;
+      text-align: right;
     }
 
     .caw-unified__text {
@@ -1955,7 +2004,7 @@ body.is-print-prep .poster-block__title { font-size: 1.12rem; }
 body.is-print-prep .audience-value__title { font-size: 1.2rem; }
 body.is-print-prep .biz-validation__title { font-size: 1.2rem; }
 body.is-print-prep .caw-unified__title { font-size: 1.15rem; }
-body.is-print-prep .caw-unified__text { font-size: 0.92rem; line-height: 1.38; }
+body.is-print-prep .caw-unified__text { font-size: 1.08rem; line-height: 1.42; }
 body.is-print-prep .people-cards.people-cards--inline { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3mm; }
 body.is-print-prep .people-card.people-card--compact { padding: 3mm; gap: 2mm; }
 body.is-print-prep .people-card.people-card--compact .people-card__name { font-size: 0.92rem; }
@@ -1965,8 +2014,8 @@ body.is-print-prep .caw-unified__footer { padding: 3mm 4.5mm 3.5mm; }
 body.is-print-prep .caw-unified__pill { font-size: 0.72rem; padding: 1.5mm 3mm; }
 
 body.is-print-prep .hero-problems { padding: 5mm 4.5mm 4mm; }
-body.is-print-prep .hero-problems__headline { font-size: 2.15rem; margin-bottom: 3.5mm; }
-body.is-print-prep .hero-problems__badge { font-size: 0.82rem; margin-bottom: 2mm; }
+body.is-print-prep .hero-problems__headline { font-size: 2.35rem; margin-bottom: 3.5mm; }
+body.is-print-prep .hero-problems__badge { font-size: 0.72rem; margin-bottom: 1.5mm; padding: 1.4mm 3mm; }
 body.is-print-prep .audience-value,
 body.is-print-prep .biz-validation,
 body.is-print-prep .caw-unified,
@@ -1979,20 +2028,27 @@ body.is-print-prep .hero-actors {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3mm;
   margin-bottom: 3mm;
+  align-items: stretch;
 }
 body.is-print-prep .hero-actor {
   padding: 3mm;
   gap: 2mm;
   min-height: 0;
+  height: 100%;
 }
 
-body.is-print-prep .hero-actor__role { font-size: 0.92rem; }
+body.is-print-prep .hero-actor__role { font-size: 1rem; padding: 2.2mm 3mm; }
+body.is-print-prep .hero-actor__role-icon { width: 1.45em; height: 1.45em; }
 body.is-print-prep .hero-actor__item-head { font-size: 1rem; padding: 2.2mm 3mm; }
 body.is-print-prep .hero-actor__item-body { font-size: 1.05rem; padding: 3mm 3.5mm; }
 body.is-print-prep .hero-actor__item-icon { width: 1.45em; height: 1.45em; }
 body.is-print-prep .hero-mockup {
-  margin-top: auto;
-  flex-shrink: 0;
+  margin-top: 1mm;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 body.is-print-prep .hero-mockup--laptop {
@@ -2013,7 +2069,14 @@ body.is-print-prep .hero-problems__foot { padding: 5mm 6mm 4.5mm; gap: 2.5mm; }
 body.is-print-prep .hero-problems__foot-text { font-size: 1.05rem; }
 body.is-print-prep .hero-problems__foot-brand { font-size: 1.35rem; }
 body.is-print-prep .hero-problems__foot-logo { width: 36mm; height: 36mm; }
-body.is-print-prep .caw-unified__logo { width: 44mm; height: 44mm; padding: 1mm; }
+body.is-print-prep .caw-unified__logo {
+  width: 44mm;
+  height: 44mm;
+  padding: 0;
+  border-radius: 50%;
+  border: 3px solid var(--caw-brand);
+  background: transparent;
+}
 body.is-print-prep .people-card__photo-wrap { width: 56mm; height: 56mm; max-width: 56mm; }
 body.is-print-prep .validation-ladder__dot { width: 12px; height: 12px; }
 
@@ -2087,7 +2150,7 @@ body.is-print-prep .biz-validation__grid {
   min-height: 52mm;
 }
 body.is-print-prep .biz-validation__grid .biz-item__icon { width: 32mm; height: 32mm; }
-body.is-print-prep .biz-validation__grid .stat-box__value { font-size: 2rem; }
+body.is-print-prep .biz-validation__grid .stat-box__value { font-size: 2.45rem; }
 body.is-print-prep .biz-validation__grid .stat-box__label { font-size: 0.82rem; }
 body.is-print-prep .biz-validation__grid .biz-item h4 { font-size: 1.05rem; }
 body.is-print-prep .biz-validation__grid .biz-item__desc { font-size: 0.88rem; }
@@ -2215,8 +2278,8 @@ body.is-print-prep .validation-ladder { grid-template-columns: repeat(4, 1fr); g
   .poster-header__tagline { font-size: 0.88rem !important; }
 
   .hero-problems { padding: 5mm 4.5mm 4mm !important; }
-  .hero-problems__headline { font-size: 2.15rem !important; margin-bottom: 3.5mm !important; }
-  .hero-problems__badge { font-size: 0.82rem !important; margin-bottom: 2mm !important; }
+  .hero-problems__headline { font-size: 2.35rem !important; margin-bottom: 3.5mm !important; }
+  .hero-problems__badge { font-size: 0.72rem !important; margin-bottom: 1.5mm !important; padding: 1.4mm 3mm !important; }
 
   .audience-value,
   .biz-validation,
@@ -2244,21 +2307,28 @@ body.is-print-prep .validation-ladder { grid-template-columns: repeat(4, 1fr); g
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 3mm !important;
     margin-bottom: 3mm !important;
+    align-items: stretch !important;
   }
 
   .hero-actor {
     padding: 3mm !important;
     gap: 2mm !important;
+    height: 100% !important;
   }
 
-  .hero-actor__role { font-size: 0.92rem !important; }
+  .hero-actor__role { font-size: 1rem !important; padding: 2.2mm 3mm !important; }
+  .hero-actor__role-icon { width: 1.45em !important; height: 1.45em !important; }
   .hero-actor__item-head { font-size: 1rem !important; padding: 2.2mm 3mm !important; }
   .hero-actor__item-body { font-size: 1.05rem !important; padding: 3mm 3.5mm !important; }
   .hero-actor__item-icon { width: 1.45em !important; height: 1.45em !important; }
 
   .hero-mockup {
-    margin-top: auto !important;
-    flex-shrink: 0 !important;
+    margin-top: 1mm !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .hero-mockup--laptop {
@@ -2375,7 +2445,7 @@ body.is-print-prep .validation-ladder { grid-template-columns: repeat(4, 1fr); g
   .biz-validation__grid > .biz-item,
   .biz-validation__grid > .stat-box { padding: 4mm 3mm !important; }
 
-  .biz-validation__grid .stat-box__value { font-size: 2rem !important; }
+  .biz-validation__grid .stat-box__value { font-size: 2.45rem !important; }
   .biz-validation__grid .stat-box__label { font-size: 0.82rem !important; }
   .biz-validation__grid .biz-item h4 { font-size: 1.05rem !important; }
   .biz-validation__grid .biz-item__desc { font-size: 0.88rem !important; }
@@ -2397,8 +2467,16 @@ body.is-print-prep .validation-ladder { grid-template-columns: repeat(4, 1fr); g
   .caw-unified__header { padding: 4mm 4.5mm 3.5mm !important; gap: 2.5mm !important; }
   .caw-unified__body { padding: 3mm 4.5mm !important; }
   .caw-unified__title { font-size: 1.15rem !important; }
-  .caw-unified__text { font-size: 0.92rem !important; line-height: 1.38 !important; }
-  .caw-unified__logo { width: 44mm !important; height: 44mm !important; padding: 1mm !important; }
+  .caw-unified__text { font-size: 1.08rem !important; line-height: 1.42 !important; }
+  .caw-unified__logo {
+    width: 44mm !important;
+    height: 44mm !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    border: 3px solid var(--caw-brand) !important;
+    background: transparent !important;
+  }
+  .caw-unified__category { margin-left: auto !important; }
   .caw-unified__footer { padding: 3mm 4.5mm 3.5mm !important; }
   .caw-unified__pill { font-size: 0.72rem !important; padding: 1.5mm 3mm !important; }
 
