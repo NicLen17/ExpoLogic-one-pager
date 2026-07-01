@@ -4,7 +4,7 @@
   const PAGE_ID = "poster";
   const PAGE_WIDTH_MM = 800;
   const PAGE_HEIGHT_MM = 1100;
-  const SCALE_SAFETY = 0.992;
+  const SCALE_SAFETY = 0.985;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -68,13 +68,24 @@
     page.style.removeProperty("width");
   }
 
-  function resetPageScale() {
+  let printPrepToken = 0;
+
+  function clearPrintPrepState() {
     const page = document.getElementById(PAGE_ID);
     clearPageScale();
-    restoreBlankTargets();
+    if (page) {
+      page.style.removeProperty("height");
+      page.style.removeProperty("min-height");
+    }
     document.documentElement.classList.remove("is-print-prep");
     document.body.classList.remove("is-print-prep");
     page?.classList.remove("is-print-prep");
+  }
+
+  function resetPageScale() {
+    printPrepToken += 1;
+    restoreBlankTargets();
+    clearPrintPrepState();
   }
 
   function mmToPx(mm) {
@@ -117,8 +128,8 @@
   function applyPageScale(page, scale) {
     page.classList.add("is-scaled");
     page.style.setProperty("--page-scale", String(scale));
-    page.style.setProperty("zoom", String(scale));
-    page.style.setProperty("width", `calc(${PAGE_WIDTH_MM}mm / ${scale})`);
+    page.style.setProperty("zoom", String(scale), "important");
+    page.style.setProperty("width", `calc(${PAGE_WIDTH_MM}mm / ${scale})`, "important");
   }
 
   async function fitToPage() {
@@ -130,8 +141,11 @@
     const contentHeight = await measurePosterHeight(page);
     const maxPx = mmToPx(PAGE_HEIGHT_MM);
 
-    /* Solo reduce escala para que TODO el contenido quepa; margen anti-recorte. */
-    const scale = Math.min(1, (maxPx / contentHeight) * SCALE_SAFETY);
+    /* Solo ajusta escala para que el contenido ocupe ~98,5 % de la hoja (reduce o amplía). */
+    const TARGET_FILL = 0.985;
+    const MAX_SCALE = 2.5;
+    const rawScale = (maxPx * TARGET_FILL) / contentHeight;
+    const scale = Math.min(MAX_SCALE, rawScale * SCALE_SAFETY);
     applyPageScale(page, scale);
   }
 
@@ -149,6 +163,7 @@
   }
 
   async function preparePrint() {
+    const token = ++printPrepToken;
     document.querySelectorAll(".reveal").forEach((el) => {
       el.classList.add("is-visible");
     });
@@ -156,8 +171,16 @@
       await document.fonts.ready;
     }
     await ensureImagesLoaded();
+    if (token !== printPrepToken) {
+      clearPrintPrepState();
+      return;
+    }
     stripBlankTargets();
     await fitToPage();
+    if (token !== printPrepToken) {
+      clearPrintPrepState();
+      return;
+    }
     /* Mantener prep activo hasta afterprint — alinea medición con export. */
     document.documentElement.classList.add("is-print-prep");
     document.body.classList.add("is-print-prep");

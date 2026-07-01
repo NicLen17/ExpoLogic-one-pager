@@ -81,129 +81,177 @@
         </div>
       </header>
 
-      <!-- 2. HERO: 3 problemas · 1 solución -->
+      <!-- 2. HERO: 3 problemas · 1 solución + flujo visual -->
       <section class="hero-problems reveal" aria-labelledby="hero-problems-heading">
         <span class="hero-problems__badge">El corazón del proyecto</span>
         <h2 id="hero-problems-heading" class="hero-problems__headline">
           <em>3 problemas</em> · <strong class="hero-problems__solution">1 solución</strong>
         </h2>
-        <p class="hero-problems__sub">
-          Tres actores, tres dolores críticos en cada feria. Una plataforma integral que los resuelve a la vez.
-        </p>
 
-        <div class="problems-grid">
-          <article class="problem-card">
-            <svg class="problem-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/>
-            </svg>
-            <p class="problem-card__role">Organizador</p>
-            <p class="problem-card__pain">Hasta 20 días gestionando cada evento con Excel, WhatsApp y planos en papel.</p>
-            <p class="problem-card__detail">Stands vacíos, pagos sin identificar y cero auditoría para municipios.</p>
-          </article>
-
-          <article class="problem-card">
-            <svg class="problem-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-            <p class="problem-card__role">Emprendedor / Feriante</p>
-            <p class="problem-card__pain">Incertidumbre total: filas, confirmaciones tardías y sin trazabilidad de su stand.</p>
-            <p class="problem-card__detail">Incertidumbre en la reserva y sin landing propia: pierde visibilidad web y oportunidades frente al público.</p>
-          </article>
-
-          <article class="problem-card">
-            <svg class="problem-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/>
-            </svg>
-            <p class="problem-card__role">Visitante</p>
-            <p class="problem-card__pain">La feria solo existe el día del evento: sin ver stands, productos ni próximas ediciones online.</p>
-            <p class="problem-card__detail">No puede explorar antes ni después, ni decidir participar en una futura edición.</p>
-          </article>
-        </div>
-
-        <div class="solution-converge" aria-label="Solución integral">
-          <div class="converge-arrows" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
-          <div class="solution-hub">
-            <img src="assets/logo.png" alt="" class="solution-hub__logo" width="64" height="64" aria-hidden="true" />
-            <div>
-              <h3 class="solution-hub__title">ExpoLogic — una sola plataforma para los tres</h3>
-              <p class="solution-hub__text">
-                Mapas interactivos, reservas desde el celular, lista de espera automática y <strong>presencia web para el evento y cada emprendedor</strong>.
-                El visitante explora la feria <strong>antes y después</strong> del evento; el feriante tiene su landing con catálogo y redes incluidas.
-                <strong>Un flujo unificado que digitaliza lo que hoy solo existe en papel.</strong>
-              </p>
+        <div class="hero-actors">
+          <article class="hero-actor">
+            <p class="hero-actor__role">Organizador</p>
+            <div class="hero-actor__compare">
+              <div class="hero-actor__item hero-actor__item--problem">
+                <div class="hero-actor__item-head">
+                  <svg class="hero-actor__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+                  <span>Problema</span>
+                </div>
+                <p class="hero-actor__item-body"> Excel · WhatsApp · Papel</p>
+              </div>
+              <span class="hero-actor__arrow" aria-hidden="true">↓</span>
+              <div class="hero-actor__item hero-actor__item--solution">
+                <div class="hero-actor__item-head">
+                  <svg class="hero-actor__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8h2"/><path d="M7 11h4"/></svg>
+                  <span>Solución</span>
+                </div>
+                <p class="hero-actor__item-body">Panel en tiempo real centralizado</p>
+              </div>
             </div>
-          </div>
+            <figure class="hero-mockup hero-mockup--laptop" aria-label="Panel de control ExpoLogic">
+              <img
+                class="hero-mockup__img"
+                src="assets/figure 1.jpeg"
+                alt="Panel de control ExpoLogic con KPIs de stands, cobros y ocupación"
+                width="640"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </article>
+
+          <article class="hero-actor">
+            <p class="hero-actor__role">Emprendedor / Feriante</p>
+            <div class="hero-actor__compare">
+              <div class="hero-actor__item hero-actor__item--problem">
+                <div class="hero-actor__item-head">
+                  <svg class="hero-actor__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                  <span>Problema</span>
+                </div>
+                <p class="hero-actor__item-body">Incertidumbre al reservar</p>
+              </div>
+              <span class="hero-actor__arrow" aria-hidden="true">↓</span>
+              <div class="hero-actor__item hero-actor__item--solution">
+                <div class="hero-actor__item-head">
+                  <svg class="hero-actor__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true"><path d="m4 4 7.07 17 2.51-7.39L21 11.07z"/></svg>
+                  <span>Solución</span>
+                </div>
+                <p class="hero-actor__item-body">Reserva sencilla en dos clics</p>
+              </div>
+            </div>
+            <figure class="hero-mockup hero-mockup--phone" aria-label="Mapa de reservas en celular">
+              <img
+                class="hero-mockup__img"
+                src="assets/figure 2.jpeg"
+                alt="Mapa interactivo de stands para reservar ubicación en la feria"
+                width="360"
+                height="640"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </article>
+
+          <article class="hero-actor">
+            <p class="hero-actor__role">Visitante</p>
+            <div class="hero-actor__compare">
+              <div class="hero-actor__item hero-actor__item--problem">
+                <div class="hero-actor__item-head">
+                  <svg class="hero-actor__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                  <span>Problema</span>
+                </div>
+                <p class="hero-actor__item-body">Feria solo el día del evento</p>
+              </div>
+              <span class="hero-actor__arrow" aria-hidden="true">↓</span>
+              <div class="hero-actor__item hero-actor__item--solution">
+                <div class="hero-actor__item-head">
+                  <svg class="hero-actor__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>Solución</span>
+                </div>
+                <p class="hero-actor__item-body">Explorá la feria virtual 24/7 online</p>
+              </div>
+            </div>
+            <figure class="hero-mockup hero-mockup--phone" aria-label="Landing de feria virtual">
+              <img
+                class="hero-mockup__img"
+                src="assets/figure 3.jpeg"
+                alt="Landing de feria virtual con catálogo de productos y categorías"
+                width="360"
+                height="640"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </article>
         </div>
+
+        <footer class="hero-problems__foot">
+          <img src="assets/logo.png" alt="" class="hero-problems__foot-logo" width="64" height="64" aria-hidden="true" />
+          <p class="hero-problems__foot-brand">ExpoLogic</p>
+          <p class="hero-problems__foot-text">Una plataforma que digitaliza lo que hoy solo existe en papel.</p>
+        </footer>
       </section>
 
-      <!-- 3. Audiencia + Propuesta de valor (unificado) -->
-      <section class="audience-value reveal" aria-labelledby="users-heading">
-        <div class="audience-value__col" aria-labelledby="users-heading">
-          <h2 id="users-heading" class="audience-value__title">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            ¿Quién lo usa?
-          </h2>
-          <div class="audience-cards">
-            <article class="audience-card">
+      <!-- 3. Audiencia + Propuesta de valor (vertical) -->
+      <section class="audience-value reveal" aria-labelledby="audience-value-heading">
+        <h2 id="audience-value-heading" class="audience-value__title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Audiencia y propuesta de valor
+        </h2>
+
+        <div class="audience-value__block audience-value__block--audience">
+          <div class="audience-cards audience-cards--inline">
+            <article class="audience-card audience-card--compact">
               <span class="audience-card__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>
               </span>
-              <div class="audience-card__body">
-                <h3 class="audience-card__title">Organizadores B2B</h3>
-                <p class="audience-card__stat">3.500+ ferias activas en Argentina</p>
-                <p class="audience-card__desc">Municipios, secretarías de cultura y productores que necesitan digitalizar gestión, cobros y mapas de cada evento.</p>
-              </div>
+              <h3 class="audience-card__title">Organizadores B2B</h3>
+              <p class="audience-card__stat">3.500+ ferias activas</p>
             </article>
-            <article class="audience-card">
+            <article class="audience-card audience-card--compact">
               <span class="audience-card__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </span>
-              <div class="audience-card__body">
-                <h3 class="audience-card__title">Expositores B2C</h3>
-                <p class="audience-card__stat">50K+ feriantes recurrentes</p>
-                <p class="audience-card__desc">Emprendedores de la economía popular que reservan stand, confirman participación y obtienen visibilidad web sin costo extra.</p>
-              </div>
+              <h3 class="audience-card__title">Expositores B2C</h3>
+              <p class="audience-card__stat">50K+ feriantes</p>
             </article>
-            <article class="audience-card">
+            <article class="audience-card audience-card--compact">
               <span class="audience-card__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               </span>
-              <div class="audience-card__body">
-                <h3 class="audience-card__title">Visitantes</h3>
-                <p class="audience-card__stat">Público local y regional</p>
-                <p class="audience-card__desc">Personas que buscan productos, cultura y experiencias — exploran la feria online antes, durante y después del evento.</p>
-              </div>
+              <h3 class="audience-card__title">Visitantes</h3>
+              <p class="audience-card__stat">Público regional</p>
             </article>
           </div>
-          <p class="audience-value__lead">
-            Atiende la necesidad de <strong>profesionalizar espacios comerciales efímeros</strong> con inclusión digital y trazabilidad real.
-          </p>
         </div>
 
-        <div class="audience-value__divider" aria-hidden="true"></div>
-
-        <div class="audience-value__col" aria-labelledby="value-heading">
-          <h2 id="value-heading" class="audience-value__title">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="M2 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="M12 18v4"/><path d="m19.07 19.07-2.83-2.83"/><path d="M22 12h-4"/><path d="m19.07 4.93-2.83 2.83"/></svg>
-            Propuesta de valor
-          </h2>
-          <ul class="bullet-list bullet-list--check bullet-list--audience">
-            <li>Reduce semanas de gestión manual a <strong>horas automatizadas</strong>.</li>
-            <li><strong>Presencia web</strong> para organizador, evento y cada emprendedor — landing propia con catálogo, descripción y redes, <strong>sin costo extra</strong> para el feriante.</li>
-            <li>Feria visible <strong>antes y después</strong> del evento: stands, productos y próximas ediciones online.</li>
-            <li>El visitante explora, descubre y puede <strong>inscribirse para la próxima edición</strong>.</li>
-            <li>El organizador <strong>se diferencia</strong> ofreciendo digitalización que otros eventos no tienen.</li>
-            <li>Auditoría de cobros, mapas interactivos y motor de plantillas propio.</li>
-          </ul>
-          <div class="value-chips value-chips--audience">
-            <span class="value-chip">Gratis para feriantes</span>
-            <span class="value-chip">Presencia web incluida</span>
-            <span class="value-chip">Feria 24/7</span>
-            <span class="value-chip">Impacto social</span>
+        <div class="audience-value__block audience-value__block--value">
+          <div class="value-cards">
+            <article class="value-card">
+              <span class="value-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </span>
+              <p class="value-card__text">Reduce semanas de gestión manual a <strong>horas automatizadas</strong>.</p>
+            </article>
+            <article class="value-card">
+              <span class="value-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
+              <p class="value-card__text"><strong>Presencia web</strong> para organizador, evento y cada emprendedor sin costo para el feriante.</p>
+            </article>
+            <article class="value-card">
+              <span class="value-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
+              </span>
+              <p class="value-card__text">Feria visible <strong>antes y después</strong> del evento: stands, productos y próximas ediciones online.</p>
+            </article>
+            <article class="value-card">
+              <span class="value-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              </span>
+              <p class="value-card__text">El visitante explora, descubre y puede <strong>inscribirse para la próxima edición</strong>.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -215,26 +263,38 @@
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             Modelo de negocio
           </h2>
-          <div class="biz-grid biz-grid--balanced">
-            <div class="biz-item biz-item--primary">
+          <div class="biz-grid biz-grid--balanced biz-validation__grid">
+            <div class="biz-item biz-item--primary biz-item--visual">
               <p class="biz-item__num">01</p>
+              <span class="biz-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </span>
               <h4>Pago por evento</h4>
-              <p><strong>Modelo principal.</strong> El organizador paga según participación: si supera el umbral de emprendedores, un <strong>porcentaje por asistente</strong>; si no, <strong>tarifa fija</strong> según cantidad de participantes del evento.</p>
+              <p class="biz-item__desc">Según asistencia</p>
             </div>
-            <div class="biz-item">
+            <div class="biz-item biz-item--visual">
               <p class="biz-item__num">02</p>
-              <h4>Mensualidad de mantenimiento</h4>
-              <p>Abono mínimo por base de datos, hosting y presencia web del evento — comparable al costo de desarrollar una página web.</p>
+              <span class="biz-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+              </span>
+              <h4>Mensualidad</h4>
+              <p class="biz-item__desc">Hosting y web</p>
             </div>
-            <div class="biz-item">
+            <div class="biz-item biz-item--visual">
               <p class="biz-item__num">03</p>
+              <span class="biz-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </span>
               <h4>Setup opcional</h4>
-              <p>Cobro único por armado del mapa y onboarding del organizador.</p>
+              <p class="biz-item__desc">Mapa y onboarding</p>
             </div>
-            <div class="biz-item biz-item--free">
+            <div class="biz-item biz-item--free biz-item--visual">
               <p class="biz-item__num">04</p>
-              <h4>Gratis para feriantes</h4>
-              <p>El expositor no paga: landing, catálogo y visibilidad web incluidos en lo que ofrece el organizador. SaaS 100% B2B con impacto social.</p>
+              <span class="biz-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v8H4v-8"/><path d="M22 7H2v5h20V7Z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7Z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z"/></svg>
+              </span>
+              <h4>Gratis feriantes</h4>
+              <p class="biz-item__desc">Impacto social B2B</p>
             </div>
           </div>
           <div class="revenue-flow" aria-hidden="true">
@@ -254,7 +314,7 @@
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             Prototipo y validación
           </h2>
-          <div class="stats-row stats-row--compact">
+          <div class="stats-row stats-row--compact biz-validation__grid">
             <div class="stat-box">
               <p class="stat-box__value">~50</p>
               <p class="stat-box__label">Entrevistas<br />en Tucumán</p>
@@ -272,11 +332,6 @@
               <p class="stat-box__label">Prototipo<br />validado</p>
             </div>
           </div>
-          <ul class="bullet-list bullet-list--compact">
-            <li>Flujo doble usuario (organizador + feriante) operativo.</li>
-            <li>Feedback de campo incorporado al diseño del producto.</li>
-            <li>Pilotos planificados en ferias del NOA desde Tucumán.</li>
-          </ul>
           <div class="validation-ladder" aria-hidden="true">
             <div class="validation-ladder__step validation-ladder__step--done">
               <span class="validation-ladder__dot"></span>
@@ -301,158 +356,86 @@
       <!-- 5. CAW: diferenciador + equipo (unificado) -->
       <section class="caw-unified reveal" aria-labelledby="caw-edge-heading">
         <header class="caw-unified__header">
-          <img src="assets/logo-caw.png" alt="" class="caw-unified__logo" width="72" height="72" aria-hidden="true" />
-          <div>
-            <h2 id="caw-edge-heading" class="caw-unified__title">¿Por qué <span>CAW</span> y no otro equipo?</h2>
-            <p class="caw-unified__text">
-              <strong>No somos un proyecto en papel.</strong> CAW ya opera como empresa con productos lanzados al mercado.
-              Tenemos capacidad técnica probada y experiencia real llevando software a producción.
-              Nos adaptamos a cambios de producto, requerimientos y necesidades empresariales —
-              mientras la competencia muestra ideas, <strong>nosotros ejecutamos y entregamos</strong>.
-            </p>
-            <div class="caw-unified__pills">
-              <span class="caw-unified__pill">Productos en producción</span>
-              <span class="caw-unified__pill">Capacidad técnica real</span>
-              <span class="caw-unified__pill">Adaptación empresarial</span>
-              <span class="caw-unified__pill">Ejecución, no solo pitch</span>
-            </div>
+          <div class="caw-unified__heading">
+            <img src="assets/logo-caw.png" alt="" class="caw-unified__logo" width="56" height="56" aria-hidden="true" />
+            <h2 id="caw-edge-heading" class="caw-unified__title">
+              ¿Por qué <span class="caw-unified__brand">CAW</span> y no otro equipo?
+              <span class="caw-unified__category"> · Categoría Universitaria</span>
+            </h2>
           </div>
+          <p class="caw-unified__text">
+            <strong>No somos un proyecto en papel.</strong> Empresa con productos en producción, equipo técnico probado y adaptación real a cada cliente —
+            mientras otros presentan ideas, <strong>nosotros ejecutamos y entregamos</strong>.
+          </p>
         </header>
 
         <div class="caw-unified__body">
-          <div class="caw-unified__people" aria-labelledby="people-heading">
-            <h3 id="people-heading" class="caw-unified__subtitle">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              Quiénes están detrás de CAW
-            </h3>
-            <div class="people-cards">
-              <article class="people-card">
-                <img src="assets/fabio-ramos.webp" alt="Fabio Ramos" class="people-card__photo" width="64" height="64" decoding="async" />
-                <div class="people-card__info">
-                  <h4>Fabio Ramos</h4>
-                  <p class="people-card__role">Principal Software Developer</p>
-                  <div class="people-card__tags">
-                    <span>Pensamiento analítico</span>
-                    <span>Resolución de problemas</span>
-                    <span>Liderazgo técnico</span>
-                    <span>Visión de producto</span>
-                  </div>
-                </div>
-                <span class="people-card__role-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                </span>
-              </article>
-              <article class="people-card">
-                <img src="assets/mariano-torres.webp" alt="Mariano Torres" class="people-card__photo" width="64" height="64" decoding="async" />
-                <div class="people-card__info">
-                  <h4>Mariano Torres</h4>
-                  <p class="people-card__role">Ventas</p>
-                  <div class="people-card__tags">
-                    <span>Comunicación persuasiva</span>
-                    <span>Empatía con clientes</span>
-                    <span>Negociación</span>
-                    <span>Networking institucional</span>
-                  </div>
-                </div>
-                <span class="people-card__role-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                </span>
-              </article>
-              <article class="people-card">
-                <img src="assets/mauricio-medina.webp" alt="Medina Mauricio" class="people-card__photo" width="64" height="64" decoding="async" />
-                <div class="people-card__info">
-                  <h4>Medina Mauricio</h4>
-                  <p class="people-card__role">Ventas y Operaciones</p>
-                  <div class="people-card__tags">
-                    <span>Organización</span>
-                    <span>Atención al detalle</span>
-                    <span>Seguimiento riguroso</span>
-                    <span>Orientación a resultados</span>
-                  </div>
-                </div>
-                <span class="people-card__role-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-                </span>
-              </article>
-            </div>
+          <div class="people-cards people-cards--inline">
+            <article class="people-card people-card--compact">
+              <div class="people-card__photo-wrap">
+                <img src="assets/fabio-ramos.webp" alt="Fabio Ramos" class="people-card__photo" width="120" height="120" decoding="async" />
+              </div>
+              <h4 class="people-card__name">Fabio Ramos</h4>
+              <p class="people-card__role">Principal Software Developer</p>
+              <div class="people-card__tags">
+                <span>Pensamiento analítico</span>
+                <span>Liderazgo técnico</span>
+                <span>Visión de producto</span>
+              </div>
+            </article>
+            <article class="people-card people-card--compact">
+              <div class="people-card__photo-wrap">
+                <img src="assets/mariano-torres.webp" alt="Mariano Torres" class="people-card__photo" width="120" height="120" decoding="async" />
+              </div>
+              <h4 class="people-card__name">Mariano Torres</h4>
+              <p class="people-card__role">Ventas</p>
+              <div class="people-card__tags">
+                <span>Comunicación persuasiva</span>
+                <span>Empatía con clientes</span>
+                <span>Negociación</span>
+              </div>
+            </article>
+            <article class="people-card people-card--compact">
+              <div class="people-card__photo-wrap">
+                <img src="assets/mauricio-medina.webp" alt="Medina Mauricio" class="people-card__photo" width="120" height="120" decoding="async" />
+              </div>
+              <h4 class="people-card__name">Medina Mauricio</h4>
+              <p class="people-card__role">Ventas y Operaciones</p>
+              <div class="people-card__tags">
+                <span>Organización</span>
+                <span>Seguimiento riguroso</span>
+                <span>Orientación a resultados</span>
+              </div>
+            </article>
           </div>
         </div>
+
+        <footer class="caw-unified__footer">
+          <div class="caw-unified__pills">
+            <span class="caw-unified__pill">Productos en producción</span>
+            <span class="caw-unified__pill">Capacidad técnica real</span>
+            <span class="caw-unified__pill">Adaptación empresarial</span>
+            <span class="caw-unified__pill">Ejecución, no solo pitch</span>
+          </div>
+        </footer>
       </section>
 
-      <!-- 7. Prototipo visual + CTA -->
-      <div class="bottom-section reveal">
-        <section class="poster-block poster-block--flow" aria-labelledby="prototype-heading">
-          <h2 id="prototype-heading" class="poster-block__title">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-            Cómo funciona — flujo integral
-          </h2>
-          <div class="prototype-visual">
-            <div class="prototype-card">
-              <span class="prototype-card__step">1</span>
-              <span class="prototype-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-              </span>
-              <span class="prototype-card__text">Organizador digitaliza su feria, carga el mapa y se diferencia del mercado</span>
-            </div>
-            <div class="prototype-card">
-              <span class="prototype-card__step">2</span>
-              <span class="prototype-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              </span>
-              <span class="prototype-card__text">Feriante reserva stand desde el celular con landing, catálogo y redes incluidas</span>
-            </div>
-            <div class="prototype-card">
-              <span class="prototype-card__step">3</span>
-              <span class="prototype-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              </span>
-              <span class="prototype-card__text">Visitante explora stands y productos antes, durante y después del evento</span>
-            </div>
+      <!-- CTA -->
+      <footer class="poster-cta reveal" aria-labelledby="cta-heading">
+        <div class="poster-cta__main">
+          <div class="poster-cta__copy">
+            <h2 id="cta-heading" class="poster-cta__title">¡Hablemos de tu próximo evento!</h2>
+            <p class="poster-cta__sub">Agendá una demo de 30 minutos</p>
           </div>
-          <ul class="bullet-list bullet-list--check prototype-features">
-            <li>Mapas interactivos en tiempo real con motor de plantillas propio.</li>
-            <li>Landing por evento y por emprendedor, sin cargo extra al feriante.</li>
-            <li>Visibilidad web continua: el visitante puede inscribirse para la próxima edición.</li>
-            <li>Lista de espera automática cuando un stand se libera.</li>
-            <li>Reportes de ocupación y auditoría de cobros para el organizador.</li>
-          </ul>
-          <div class="flow-pipeline" aria-hidden="true">
-            <div class="flow-pipeline__step flow-pipeline__step--active">
-              <span class="flow-pipeline__dot"></span>
-              <span>Configuración</span>
-            </div>
-            <div class="flow-pipeline__step flow-pipeline__step--active">
-              <span class="flow-pipeline__dot"></span>
-              <span>Reservas</span>
-            </div>
-            <div class="flow-pipeline__step flow-pipeline__step--active">
-              <span class="flow-pipeline__dot"></span>
-              <span>Exploración</span>
-            </div>
-            <div class="flow-pipeline__step">
-              <span class="flow-pipeline__dot"></span>
-              <span>Evento en vivo</span>
-            </div>
-            <div class="flow-pipeline__step">
-              <span class="flow-pipeline__dot"></span>
-              <span>Presencia 24/7</span>
-            </div>
-          </div>
-        </section>
-
-        <footer class="poster-cta" aria-labelledby="cta-heading">
-          <h2 id="cta-heading" class="poster-cta__title">¡Hablemos de tu próximo evento!</h2>
-          <p class="poster-cta__sub">Agendá una demo de 30 minutos</p>
-          <a href="https://wa.link/gwodju" class="poster-cta__qr" target="_blank" rel="noopener noreferrer" aria-label="Contacto por WhatsApp">
-            <img src="assets/qr-contact.png" alt="QR WhatsApp" width="240" height="240" decoding="sync" />
-            <span>Escaneá para contactarnos</span>
-          </a>
           <div class="poster-cta__links">
             <a href="https://www.caw.com.ar/" target="_blank" rel="noopener">caw.com.ar</a>
             <a href="mailto:cawtecharg@gmail.com">cawtecharg@gmail.com</a>
           </div>
-        </footer>
-      </div>
+        </div>
+        <a href="https://wa.link/gwodju" class="poster-cta__qr" target="_blank" rel="noopener noreferrer" aria-label="Contacto por WhatsApp">
+          <img src="assets/qr-contact.png" alt="" width="128" height="128" decoding="sync" />
+        </a>
+      </footer>
 
     </main>
   </div>

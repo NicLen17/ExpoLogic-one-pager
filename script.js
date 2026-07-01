@@ -58,7 +58,10 @@
     page.style.removeProperty("--page-scale");
   }
 
+  let printPrepToken = 0;
+
   function resetPageScale() {
+    printPrepToken += 1;
     clearPageScale();
     restoreBlankTargets();
   }
@@ -96,10 +99,12 @@
   }
 
   async function preparePrint() {
+    const token = ++printPrepToken;
     document.querySelectorAll(".reveal").forEach((el) => {
       el.classList.add("is-visible");
     });
     await ensureImagesLoaded();
+    if (token !== printPrepToken) return;
     stripBlankTargets();
     fitToPage();
   }

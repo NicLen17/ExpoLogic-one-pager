@@ -14,7 +14,32 @@
 
   function printWindow(win) {
     return new Promise((resolve) => {
-      win.addEventListener("afterprint", resolve, { once: true });
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        mql.removeEventListener("change", onPrintMediaChange);
+        clearTimeout(focusFallbackTimer);
+        clearTimeout(hardFallbackTimer);
+        resolve();
+      };
+
+      const mql = win.matchMedia("print");
+      const onPrintMediaChange = (event) => {
+        if (!event.matches) finish();
+      };
+
+      win.addEventListener("afterprint", finish, { once: true });
+      mql.addEventListener("change", onPrintMediaChange);
+
+      /* Si el usuario cancela, algunos navegadores no emiten afterprint. */
+      const focusFallbackTimer = setTimeout(() => {
+        win.addEventListener("focus", () => setTimeout(finish, 350), { once: true });
+      }, 400);
+
+      const hardFallbackTimer = setTimeout(finish, 120000);
+
+      win.focus?.();
       win.print();
     });
   }
@@ -49,6 +74,7 @@
     iframe.style.height = frameSize.height;
     document.body.appendChild(iframe);
 
+    let api;
     try {
       await new Promise((resolve, reject) => {
         iframe.addEventListener("load", resolve, { once: true });
@@ -56,11 +82,11 @@
         iframe.src = url;
       });
 
-      const api = await waitForIframePrintApi(iframe);
+      api = await waitForIframePrintApi(iframe);
       await api.preparePrint();
       await printWindow(iframe.contentWindow);
-      api.resetPageScale?.();
     } finally {
+      api?.resetPageScale?.();
       iframe.remove();
     }
   }
@@ -68,9 +94,12 @@
   async function printLocal() {
     const api = window.__expoPrint;
     if (!api?.preparePrint) throw new Error("Print API no disponible.");
-    await api.preparePrint();
-    await printWindow(window);
-    api.resetPageScale?.();
+    try {
+      await api.preparePrint();
+      await printWindow(window);
+    } finally {
+      api.resetPageScale?.();
+    }
   }
 
   async function exportDocuments(target) {
